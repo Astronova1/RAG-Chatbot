@@ -14,8 +14,10 @@ def chunker_markdown_text(mdtext: str, source_name: str, chunk_size= 300) -> lis
                 cleaned_lines.append(line.strip())
         title = lines[0].strip(' *#') if cleaned_lines else "No title found"
         result = '\n'.join(cleaned_lines)
-        print("Title is", title)
-        print("Text is", result)
+        contextual_metadata = f"Source: {source_name}\nTitle: {title}\n"
+        result = contextual_metadata + result
+        print(result)
         chunks.append(result)
     return chunks
+
 chunker_markdown_text(pathlib.Path("Fy26_Q3.md").read_text(), "FY26_Q3_Consolidated_Financial_Statements.pdf")
